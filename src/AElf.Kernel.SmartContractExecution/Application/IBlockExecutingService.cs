@@ -86,7 +86,7 @@ namespace AElf.Kernel.SmartContractExecution.Application
                     {
                         await _chainManager.SetChainBlockLinkExecutionStatus(blockLink,
                             ChainBlockLinkExecutionStatus.ExecutionFailed);
-                        await _chainManager.RemoveCannotExecutedLongestBranchAsync(chain);
+                        await _chainManager.RemoveLongestBranchAsync(chain);
                         Logger.LogWarning($"Block validate fails before execution. block hash : {blockLink.BlockHash}");
                         return null;
                     }
@@ -95,7 +95,7 @@ namespace AElf.Kernel.SmartContractExecution.Application
                     {
                         await _chainManager.SetChainBlockLinkExecutionStatus(blockLink,
                             ChainBlockLinkExecutionStatus.ExecutionFailed);
-                        await _chainManager.RemoveCannotExecutedLongestBranchAsync(chain);
+                        await _chainManager.RemoveLongestBranchAsync(chain);
                         Logger.LogWarning($"Block execution failed. block hash : {blockLink.BlockHash}");
                         return null;
                     }
@@ -104,7 +104,7 @@ namespace AElf.Kernel.SmartContractExecution.Application
                     {
                         await _chainManager.SetChainBlockLinkExecutionStatus(blockLink,
                             ChainBlockLinkExecutionStatus.ExecutionFailed);
-                        await _chainManager.RemoveCannotExecutedLongestBranchAsync(chain);
+                        await _chainManager.RemoveLongestBranchAsync(chain);
                         Logger.LogWarning($"Block validate fails after execution. block hash : {blockLink.BlockHash}");
                         return null;
                     }
@@ -128,7 +128,7 @@ namespace AElf.Kernel.SmartContractExecution.Application
             }
             catch (Exception ex)
             {
-                await _chainManager.RemoveCannotExecutedLongestBranchAsync(chain);
+                await _chainManager.RemoveLongestBranchAsync(chain);
                 Logger.LogWarning($"Block validate or execute fails. Exception message {ex.Message}");
                 throw;
             }
